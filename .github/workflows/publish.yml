@@ -21,7 +21,7 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ghcr.io/garuda127/gif-app:${{ github.sha }} .
+          docker build --platform=linux/arm64 -t ghcr.io/garuda127/gif-app:${{ github.sha }} .
           docker tag ghcr.io/garuda127/gif-app:${{ github.sha }} ghcr.io/garuda127/gif-app:latest
           docker push ghcr.io/garuda127/gif-app:${{ github.sha }}
           docker push ghcr.io/garuda127/gif-app:latest
