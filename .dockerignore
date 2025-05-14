@@ -1,0 +1,47 @@
+# Archivos y directorios de Git
+.git
+.gitignore
+.github
+
+# Entorno de desarrollo
+node_modules
+npm-debug.log
+yarn-error.log
+.npm
+.yarn
+.pnp
+.pnp.js
+
+# Archivos de prueba y documentación
+/e2e
+/docs
+*.spec.ts
+*.test.ts
+README.md
+*.md
+
+# Archivos de IDE y editores
+.idea
+.vscode
+*.swp
+*.swo
+.editorconfig
+*.sublime-*
+
+# Archivos de compilación y temporales
+/dist
+/tmp
+/out-tsc
+.angular
+.sass-cache
+connect.lock
+coverage
+
+# Otros
+.firebase
+.DS_Store
+Thumbs.db
+*.zip
+.env
+.env.*
+!.env.example
