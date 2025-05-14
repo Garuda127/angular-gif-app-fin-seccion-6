@@ -1,5 +1,5 @@
 # Etapa 1: Build Angular
-FROM node:20-alpine AS build-step
+FROM --platform=linux/arm64 node:20-alpine AS build-step
 
 WORKDIR /app
 
