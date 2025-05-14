@@ -4,8 +4,8 @@ FROM node:20-alpine AS build-step
 WORKDIR /app
 
 # Copiamos solo los archivos de dependencias primero para aprovechar la caché
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json ./
+RUN npm i
 
 # Copiamos el resto del código fuente
 COPY . .
