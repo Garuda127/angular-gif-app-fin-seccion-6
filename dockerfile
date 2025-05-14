@@ -1,5 +1,5 @@
 # Etapa 1: Build Angular
-FROM --platform=linux/arm64 node:20-alpine AS build-step
+FROM node:20-alpine AS build-step
 
 WORKDIR /app
 
@@ -11,7 +11,9 @@ RUN npm ci
 COPY . .
 
 # Build de producción
+RUN docker build --platform=linux/arm64 -t gifs-angular .
 RUN npm run build --prod
+
 
 # Etapa 2: Servir con Nginx
 FROM nginx:alpine
