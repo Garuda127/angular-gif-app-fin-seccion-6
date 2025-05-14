@@ -17,7 +17,7 @@ RUN npm run build --prod
 FROM nginx:alpine
 
 # Copiamos los archivos generados en el build
-COPY --from=build-step /app/dist/browser/gifs-app /usr/share/nginx/html
+COPY --from=build-step /app/dist/gifs-app/browser /usr/share/nginx/html
 
 # Configuración personalizada de Nginx para soporte SPA
 COPY nginx.conf /etc/nginx/conf.d/default.conf
