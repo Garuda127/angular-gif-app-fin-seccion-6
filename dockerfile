@@ -1,24 +1,29 @@
-# Etapa 1: Build de Angular
+# Etapa 1: Build Angular
 FROM node:20-alpine AS build-step
 
 WORKDIR /app
 
-# Copiar solo los archivos de dependencias para aprovechar la caché
+# Copiamos solo los archivos de dependencias primero para aprovechar la caché
 COPY package.json package-lock.json ./
-
-# Instalar dependencias
 RUN npm ci
 
-# Copiar el resto del código fuente
+# Copiamos el resto del código fuente
 COPY . .
 
-# Establecer variables de entorno para producción
-ENV NODE_ENV=production
-
-# Construir la aplicación
+# Build de producción
 RUN npm run build --prod
 
-# Eliminar archivos innecesarios para reducir el tamaño
-RUN rm -rf node_modules
+# Etapa 2: Servir con Nginx
+FROM nginx:alpine
 
+# Copiamos los archivos generados en el build
+COPY --from=build-step /app/dist/browser/gifs-app /usr/share/nginx/html
 
+# Configuración personalizada de Nginx para soporte SPA
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Puerto que expone Nginx dentro del contenedor
+EXPOSE 80
+
+# Inicia Nginx
+CMD ["nginx", "-g", "daemon off;"]
