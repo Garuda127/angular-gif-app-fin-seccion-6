@@ -1,17 +1,16 @@
 # Etapa 1: Build Angular
-FROM --platform=linux/arm64 node:20-alpine AS build-step
+FROM  node:20-alpine AS build-step
 
 WORKDIR /app
 
 # Copiamos solo los archivos de dependencias primero para aprovechar la caché
-COPY package.json ./
-RUN npm i
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # Copiamos el resto del código fuente
 COPY . .
 
 # Build de producción
-RUN docker build --platform=linux/arm64 -t gifs-angular .
 RUN npm run build --prod
 
 
